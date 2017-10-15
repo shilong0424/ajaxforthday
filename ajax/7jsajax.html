@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>四大名著的案例</title>
+	<style>
+		.contain {
+			width: 600px;
+			height: 200px;
+			background: lightblue;
+			margin: 40px auto;
+			text-align: center;
+		}
+	</style>
+	<script src = "jquery.js"></script>
+	<script>
+	$(function(){
+		$('#btn').click(function(){
+			var search = $('#search').val();
+			$.ajax({
+				url:'7.php',
+				type:'post',
+				data:{aaa:search},//aaa是形参,为了让后台接受的一个名字获取search值
+				dataType:'json',
+				success:function(data){
+					if (data.flag == 0 ) {
+						$('#info').html('该书不存在');
+					} else {
+						var tag = '<ul><li>书名:'+data.name+'</li><li>作者:'+data.author+'</li><li>作者:'+data.desc+'</li></ul>';
+						$('#info').html(tag);
+					}
+				},
+				error:function (data){
+					console.dir(data);
+					$('#info').html("服务器发生错误,请与管理员联系!");
+				}
+
+			});
+		});
+	});
+	</script>
+</head>
+<body>
+	<div class="contain">
+		<div>
+			图书编号:<input type="text" id="search" >
+			<input type="button" id="btn" value="查询">
+		</div>
+		<div id="info"></div>
+	</div>
+</body>
+</html>

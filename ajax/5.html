@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>复习ajax的封装</title>
+	<script src= "5.ajax.js"></script>
+	<script>
+		window.onload  = function (){
+			var btn = document.getElementById('btn');
+			btn.onclick = function(){
+				ajax('5-1.php','post','lover=爱好&example=游泳','json',function(data){
+					var div = document.getElementById('fo1');
+					div.innerHTML = data.ming+"-----"+data.li;
+				});
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="fo1"></div>
+	<input type="button" value="点击" id="btn">
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>json的使用</title>
+	<script>
+		window.onload = function (){
+			var btn = document.getElementById("btn");
+			btn.onclick = function (){
+				var uname = document.getElementById("username").value;
+				var pw = document.getElementById("password").value;
+				//第一步
+				var xhr = null;
+				if (window.XMLHttpRequest) {
+					xhr = new XMLHttpRequest();//主流浏览器
+				}else {
+					xhr = new ActiveXObject('Microsoft.XMLHTTP');//IE6
+				}
+				//第二步
+				var pase = 'username='+uname+'&password='+pw; // 如果是json数据的话，根据传输的地址可以用来获取不同的数据接口
+				xhr.open('post','2.php',true);
+				//第三步
+				//post的方法使用需要设置请求头信息
+				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				xhr.send(pase);
+				//第四步
+				xhr.onreadystatechange = function (){
+					if (xhr.readyState == 4 && xhr.status == 200 ) {
+						var dat = xhr.responseText;//如果是XML数据的话，写responseXML
+						var shuju = JSON.parse(dat);//JSON.parse()是将json形式的字符串数据转换成对象形式
+						console.log(shuju.name);
+						console.log(shuju.age);
+						console.log(shuju.height);
+
+					};
+				}
+			}
+
+		}
+	</script>
+</head>
+<body>
+	用户名：<input type="text" id="username"><span id="info"></span>
+	密码：<input type="text" id="password">
+	<input type="button" value="提交" id="btn"><br>
+	<div id="info1"></div>
+</body>
+</html>

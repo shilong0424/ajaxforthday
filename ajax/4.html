@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="8.js"></script> <!-- 或者引用 4.json.js -->
+	<script>
+	window.onload = function (){
+		var btn1 = document.getElementById('btn1');
+		btn1.onclick = function (){
+			ajax('4-1.php','get','username=csl&password=123','text',function(data){
+			var div1 = document.getElementById('fo1');
+			div1.innerHTML = data;
+			});
+		}
+
+		var btn2 = document.getElementById('btn2');
+		btn2.onclick = function (){
+			ajax('4-2.php','post','aaa=csl&bbb=123','json',function(data){
+			var div2 = document.getElementById('fo2');
+			//div1.innerHTML = data;
+			//div2.innerHTML = data.username+"___________________"+data.password;
+			div2.innerHTML = '<div><span>'+data.username+'</span><span><br />'+data.password+'</span></div>'
+
+			});
+		}
+
+	}
+	</script>
+</head>
+<body>
+	<div id="fo1"></div>
+	<input type="button" name="code1" id="btn1" value="点击1">
+	<div id="fo2"></div>
+	<input type="button" name="code2" id="btn2" value="点击2">
+</body>
+</html>
